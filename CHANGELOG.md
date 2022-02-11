@@ -3,3 +3,6 @@
 
 ## 0.0.2
 * Fix unhandled exception when action indicators get unmounted
+
+## 0.0.3
+* Fix incorrect order of disposing animation controller

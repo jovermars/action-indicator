@@ -43,12 +43,14 @@ class _ActionIndicatorsState extends State<ActionIndicators>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
   void initState() {
+    super.initState();
+
     _offsetTween = Tween(begin: widget.padding, end: 0);
     _colorTween = TweenSequence<Color?>([
       TweenSequenceItem(
@@ -86,7 +88,6 @@ class _ActionIndicatorsState extends State<ActionIndicators>
       });
 
     _controller.forward();
-    super.initState();
   }
 
   @override
