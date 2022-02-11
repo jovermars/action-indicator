@@ -73,9 +73,11 @@ class _ActionIndicatorsState extends State<ActionIndicators>
 
     _offsetAnimation
       ..addListener(() {
+        if (!mounted) return;
         setState(() {});
       })
       ..addStatusListener((status) {
+        if (!mounted) return;
         if (status == AnimationStatus.completed) {
           _controller.repeat();
         } else if (status == AnimationStatus.dismissed) {
