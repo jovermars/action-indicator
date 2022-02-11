@@ -2,7 +2,7 @@ library action_indicators;
 
 import 'package:flutter/widgets.dart';
 
-import 'arrow_insets.dart';
+import 'indicator_insets.dart';
 import 'arrow_painter.dart';
 
 class ActionIndicators extends StatefulWidget {

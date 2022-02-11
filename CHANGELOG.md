@@ -6,3 +6,6 @@
 
 ## 0.0.3
 * Fix incorrect order of disposing animation controller
+
+## 0.0.4
+* Added constructor for IndicatorInsets to easily add diagonal indicators

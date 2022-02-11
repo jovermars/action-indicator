@@ -1,3 +1,8 @@
+enum InsetDiagonal {
+  leftRight,
+  rightLeft,
+}
+
 class IndicatorInsets {
   final bool topLeft;
   final bool topRight;
@@ -11,11 +16,11 @@ class IndicatorInsets {
     required this.bottomRight,
   });
 
-  IndicatorInsets.diagonal({required bool startLeft})
-      : topLeft = startLeft,
-        topRight = !startLeft,
-        bottomLeft = !startLeft,
-        bottomRight = startLeft;
+  IndicatorInsets.diagonal({required InsetDiagonal diagonal})
+      : topLeft = diagonal == InsetDiagonal.leftRight,
+        topRight = diagonal == InsetDiagonal.rightLeft,
+        bottomLeft = diagonal == InsetDiagonal.rightLeft,
+        bottomRight = diagonal == InsetDiagonal.leftRight;
 
   IndicatorInsets.all()
       : topLeft = true,

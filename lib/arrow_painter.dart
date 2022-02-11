@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'arrow_insets.dart';
+import 'indicator_insets.dart';
 
 class ArrowPainter extends CustomPainter {
   final double width;
