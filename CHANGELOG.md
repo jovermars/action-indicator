@@ -1,6 +1,7 @@
 ## 0.0.5
-* Implemented example application
 * Added IndicatorInsets for left, top, right and bottom
+* Implemented example application
+* Added .pubignore
 
 ## 0.0.4
 * Added constructor for IndicatorInsets to easily add diagonal indicators
