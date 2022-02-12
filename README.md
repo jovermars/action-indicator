@@ -1,5 +1,9 @@
 
-[![Pub Version](https://img.shields.io/pub/v/badges?color=blueviolet)](https://pub.dev/packages/action_indicators)
+[![Pub Version](https://img.shields.io/pub/v/action_indicators?color=blue)](https://pub.dev/packages/action_indicators)
 
-# action-indicator
-Animated indicators of action on any type of widget in Flutter
+# Action Indicator
+Animated indicators indicating action on any type of widget in Flutter. 
+
+Typical use case to indicate dragging or swipe direction
+
+
