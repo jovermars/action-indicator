@@ -8,4 +8,4 @@ Typical use case to indicate dragging or swipe direction.
 Visibility of each indicator can be set indipendently using `IndicatorInsets`
 
 ## Demo
-<img src="https://github.com/jovermars/action-indicators/raw/main/images/preview.gif"> 
+<img src="https://github.com/jovermars/action-indicators/raw/main/images/preview.gif" height=400> 
