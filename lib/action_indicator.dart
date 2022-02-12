@@ -9,19 +9,21 @@ class ActionIndicator extends StatefulWidget {
   final Color color;
   final double width;
   final double thickness;
-  final Duration speed;
+  final Duration duration;
+  final Duration timeout;
   final bool enabled;
   final IndicatorInsets indicator;
 
-  const ActionIndicator(
-      {Key? key,
-      required this.indicator,
-      required this.color,
-      this.width = 24,
-      this.thickness = 5,
-      this.speed = const Duration(milliseconds: 900),
-      this.enabled = true})
-      : super(key: key);
+  const ActionIndicator({
+    Key? key,
+    required this.indicator,
+    required this.color,
+    this.enabled = true,
+    this.width = 24,
+    this.thickness = 5,
+    this.duration = const Duration(milliseconds: 500),
+    this.timeout = const Duration(milliseconds: 500),
+  }) : super(key: key);
 
   @override
   State<ActionIndicator> createState() => _ActionIndicatorsState();
@@ -63,8 +65,7 @@ class _ActionIndicatorsState extends State<ActionIndicator>
               begin: widget.color, end: widget.color.withOpacity(0))),
     ]);
 
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1000));
+    _controller = AnimationController(vsync: this, duration: widget.duration);
 
     _offsetAnimation = _offsetTween.animate(_controller);
     _colorAnimation = _colorTween.animate(
@@ -78,8 +79,7 @@ class _ActionIndicatorsState extends State<ActionIndicator>
       ..addStatusListener((status) {
         if (!mounted) return;
         if (status == AnimationStatus.completed) {
-          Future.delayed(const Duration(milliseconds: 500),
-              () => _controller.forward(from: 0));
+          Future.delayed(widget.timeout, () => _controller.forward(from: 0));
         }
       });
 

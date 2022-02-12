@@ -1,3 +1,6 @@
+## 0.0.8
+* Fixed issue for setting duration and timeout of animation
+
 ## 0.0.7
 * Added stand alone action indicator without child to indicate page scroll
 
