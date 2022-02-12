@@ -97,7 +97,7 @@ class _ActionIndicatorsState extends State<ActionIndicators>
         padding: EdgeInsets.all(widget.padding),
         child: widget.child,
       ),
-      painter: widget.enabled
+      foregroundPainter: widget.enabled
           ? ArrowPainter(
               width: widget.width,
               thickness: widget.thickness,

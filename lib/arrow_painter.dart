@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'dart:math' as math;
 import 'indicator_insets.dart';
 
 class ArrowPainter extends CustomPainter {
@@ -8,6 +8,7 @@ class ArrowPainter extends CustomPainter {
   final Color color;
   final double offset;
   final IndicatorInsets indicators;
+  final Paint _painter;
 
   ArrowPainter({
     required this.indicators,
@@ -15,47 +16,68 @@ class ArrowPainter extends CustomPainter {
     required this.thickness,
     required this.color,
     required this.offset,
-  });
+  }) : _painter = Paint()
+          ..color = color
+          ..strokeWidth = thickness
+          ..style = PaintingStyle.stroke
+          ..strokeJoin = StrokeJoin.round
+          ..strokeCap = StrokeCap.round;
 
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = color
-      ..strokeWidth = thickness
-      ..style = PaintingStyle.stroke
-      ..strokeJoin = StrokeJoin.round
-      ..strokeCap = StrokeCap.round;
+    var arrow = Path();
+    arrow.moveTo(0, width);
+    arrow.lineTo(0, 0);
+    arrow.lineTo(width, 0);
 
-    var p = Path();
-    // top left
+    // top
+    if (indicators.top) {
+      var topCenter = Offset(size.width / 2, offset);
+      var rotation = math.pi * 0.25;
+      drawRotated(canvas, arrow, topCenter, rotation);
+    }
+
+    if (indicators.bottom) {
+      var bottomCenter = Offset(size.width / 2, size.height - offset);
+      drawRotated(canvas, arrow, bottomCenter, math.pi * -0.75);
+    }
+
+    if (indicators.left) {
+      var leftCenter = Offset(offset, size.height / 2);
+      drawRotated(canvas, arrow, leftCenter, math.pi * -0.25);
+    }
+    if (indicators.right) {
+      var rightCenter = Offset(size.width - offset, size.height / 2);
+      drawRotated(canvas, arrow, rightCenter, math.pi * 0.75);
+    }
+
     if (indicators.topLeft) {
-      p.moveTo(width + offset, offset);
-      p.relativeLineTo(-width, 0);
-      p.relativeLineTo(0, width);
+      var topLeft = Offset(offset, offset);
+      drawRotated(canvas, arrow, topLeft, 0);
     }
 
-    // top right
     if (indicators.topRight) {
-      p.moveTo(size.width - width - offset, offset);
-      p.relativeLineTo(width, 0);
-      p.relativeLineTo(0, width);
+      var topRight = Offset(size.width - offset, offset);
+      drawRotated(canvas, arrow, topRight, math.pi * 0.5);
     }
 
-    // bottom left
     if (indicators.bottomLeft) {
-      p.moveTo(offset + width, size.height - offset);
-      p.relativeLineTo(-width, 0);
-      p.relativeLineTo(0, -width);
+      var bottomLeft = Offset(offset, size.height - offset);
+      drawRotated(canvas, arrow, bottomLeft, math.pi * -0.5);
     }
 
-    // bottom right
     if (indicators.bottomRight) {
-      p.moveTo(size.width - offset - width, size.height - offset);
-      p.relativeLineTo(width, 0);
-      p.relativeLineTo(0, -width);
+      var bottomRight = Offset(size.width - offset, size.height - offset);
+      drawRotated(canvas, arrow, bottomRight, math.pi);
     }
+  }
 
-    canvas.drawPath(p, paint);
+  void drawRotated(Canvas canvas, Path p, Offset position, double rotation) {
+    canvas.save();
+    canvas.translate(position.dx, position.dy);
+    canvas.rotate(rotation);
+    canvas.drawPath(p, _painter);
+    canvas.restore();
   }
 
   @override
