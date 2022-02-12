@@ -1,3 +1,7 @@
+## 0.0.6
+* Added pause between animation cycles for wave effect
+* Removed padding on child and pushed arrows around of boudaries of child
+
 ## 0.0.5
 * Added IndicatorInsets for left, top, right and bottom
 * Implemented example application

@@ -32,42 +32,45 @@ class ArrowPainter extends CustomPainter {
 
     // top
     if (indicators.top) {
-      var topCenter = Offset(size.width / 2, offset);
+      var topCenter = Offset(size.width / 2, -offset - width / 2);
       var rotation = math.pi * 0.25;
       drawRotated(canvas, arrow, topCenter, rotation);
     }
 
     if (indicators.bottom) {
-      var bottomCenter = Offset(size.width / 2, size.height - offset);
+      var bottomCenter =
+          Offset(size.width / 2, size.height + offset + width / 2);
       drawRotated(canvas, arrow, bottomCenter, math.pi * -0.75);
     }
 
     if (indicators.left) {
-      var leftCenter = Offset(offset, size.height / 2);
+      var leftCenter = Offset(-offset - width / 2, size.height / 2);
       drawRotated(canvas, arrow, leftCenter, math.pi * -0.25);
     }
+
     if (indicators.right) {
-      var rightCenter = Offset(size.width - offset, size.height / 2);
+      var rightCenter =
+          Offset(size.width + offset + width / 2, size.height / 2);
       drawRotated(canvas, arrow, rightCenter, math.pi * 0.75);
     }
 
     if (indicators.topLeft) {
-      var topLeft = Offset(offset, offset);
+      var topLeft = Offset(-offset, -offset);
       drawRotated(canvas, arrow, topLeft, 0);
     }
 
     if (indicators.topRight) {
-      var topRight = Offset(size.width - offset, offset);
+      var topRight = Offset(size.width + offset, -offset);
       drawRotated(canvas, arrow, topRight, math.pi * 0.5);
     }
 
     if (indicators.bottomLeft) {
-      var bottomLeft = Offset(offset, size.height - offset);
+      var bottomLeft = Offset(-offset, size.height + offset);
       drawRotated(canvas, arrow, bottomLeft, math.pi * -0.5);
     }
 
     if (indicators.bottomRight) {
-      var bottomRight = Offset(size.width - offset, size.height - offset);
+      var bottomRight = Offset(size.width + offset, size.height + offset);
       drawRotated(canvas, arrow, bottomRight, math.pi);
     }
   }

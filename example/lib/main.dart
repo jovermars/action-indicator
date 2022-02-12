@@ -45,7 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
           color: arrowColor,
           enabled: _enabled,
           indicators: IndicatorInsets.all(),
-          padding: 5,
           child: Container(color: containerColor, width: 200, height: 300),
         ),
       ),

@@ -7,7 +7,7 @@ import 'arrow_painter.dart';
 
 class ActionIndicators extends StatefulWidget {
   final Widget child;
-  final double padding;
+  final double offset;
   final Color color;
   final double width;
   final double thickness;
@@ -15,17 +15,17 @@ class ActionIndicators extends StatefulWidget {
   final bool enabled;
   final IndicatorInsets indicators;
 
-  const ActionIndicators({
-    Key? key,
-    required this.indicators,
-    required this.child,
-    required this.padding,
-    required this.color,
-    this.width = 5,
-    this.thickness = 3,
-    this.speed = const Duration(milliseconds: 900),
-    this.enabled = true,
-  }) : super(key: key);
+  const ActionIndicators(
+      {Key? key,
+      required this.indicators,
+      required this.child,
+      required this.color,
+      this.offset = 8,
+      this.width = 5,
+      this.thickness = 3,
+      this.speed = const Duration(milliseconds: 900),
+      this.enabled = true})
+      : super(key: key);
 
   @override
   State<ActionIndicators> createState() => _ActionIndicatorsState();
@@ -51,7 +51,7 @@ class _ActionIndicatorsState extends State<ActionIndicators>
   void initState() {
     super.initState();
 
-    _offsetTween = Tween(begin: widget.padding, end: 0);
+    _offsetTween = Tween(begin: 0, end: widget.offset);
     _colorTween = TweenSequence<Color?>([
       TweenSequenceItem(
           weight: 2.0,
@@ -81,9 +81,8 @@ class _ActionIndicatorsState extends State<ActionIndicators>
       ..addStatusListener((status) {
         if (!mounted) return;
         if (status == AnimationStatus.completed) {
-          _controller.repeat();
-        } else if (status == AnimationStatus.dismissed) {
-          _controller.forward();
+          Future.delayed(const Duration(milliseconds: 500),
+              () => _controller.forward(from: 0));
         }
       });
 
@@ -93,10 +92,7 @@ class _ActionIndicatorsState extends State<ActionIndicators>
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      child: Padding(
-        padding: EdgeInsets.all(widget.padding),
-        child: widget.child,
-      ),
+      child: widget.child,
       foregroundPainter: widget.enabled
           ? ArrowPainter(
               width: widget.width,
