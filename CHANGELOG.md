@@ -1,3 +1,6 @@
+## 0.0.7
+* Added stand alone action indicator without child to indicate page scroll
+
 ## 0.0.6
 * Added pause between animation cycles for wave effect
 * Removed padding on child and pushed arrows around of boudaries of child

@@ -62,4 +62,14 @@ class IndicatorInsets {
         top = top ?? false,
         right = right ?? false,
         bottom = bottom ?? false;
+
+  int get count =>
+      (topLeft ? 1 : 0) +
+      (topRight ? 1 : 0) +
+      (bottomLeft ? 1 : 0) +
+      (bottomRight ? 1 : 0) +
+      (left ? 1 : 0) +
+      (top ? 1 : 0) +
+      (right ? 1 : 0) +
+      (bottom ? 1 : 0);
 }

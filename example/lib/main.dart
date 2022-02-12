@@ -1,4 +1,5 @@
 import 'package:action_indicators/action_indicators.dart';
+import 'package:action_indicators/action_indicator.dart';
 import 'package:action_indicators/indicator_insets.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +27,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _enabled = true;
+  bool _indicators = false;
 
   void _toggle() {
     setState(() {
-      _enabled = !_enabled;
+      _indicators = !_indicators;
     });
   }
 
@@ -41,16 +42,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       body: Center(
-        child: ActionIndicators(
-          color: arrowColor,
-          enabled: _enabled,
-          indicators: IndicatorInsets.all(),
-          child: Container(color: containerColor, width: 200, height: 300),
-        ),
-      ),
+          child: _indicators
+              ? ActionIndicators(
+                  color: arrowColor,
+                  indicators: IndicatorInsets.all(),
+                  child: Container(
+                    color: containerColor,
+                    width: 200,
+                    height: 300,
+                  ))
+              : ActionIndicator(
+                  indicator: IndicatorInsets.only(bottom: true),
+                  color: arrowColor)),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggle,
-        child: Text(!_enabled ? "On" : "Off"),
+        child: const Text("🕹", style: TextStyle(fontSize: 32)),
       ),
     );
   }

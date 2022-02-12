@@ -1,6 +1,6 @@
 name: action_indicators
 description: Indicators of actions around any widgets
-version: 0.0.6
+version: 0.0.7
 repository: https://github.com/jovermars/action-indicators
 
 environment:
