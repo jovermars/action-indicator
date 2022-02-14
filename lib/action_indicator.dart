@@ -79,7 +79,10 @@ class _ActionIndicatorsState extends State<ActionIndicator>
       ..addStatusListener((status) {
         if (!mounted) return;
         if (status == AnimationStatus.completed) {
-          Future.delayed(widget.timeout, () => _controller.forward(from: 0));
+          Future.delayed(widget.timeout, () {
+            if (!mounted) return;
+            _controller.forward(from: 0);
+          });
         }
       });
 

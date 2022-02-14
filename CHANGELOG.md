@@ -1,3 +1,6 @@
+## 0.0.9
+* Fixed issue with using animation controller after widget being disposed
+
 ## 0.0.8
 * Fixed issue for setting duration and timeout of animation
 
