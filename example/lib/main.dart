@@ -1,5 +1,5 @@
-import 'package:action_indicators/action_indicators.dart';
-import 'package:action_indicators/action_indicator.dart';
+import 'package:action_indicators/actions_indicator.dart';
+import 'package:action_indicators/single_indicator.dart';
 import 'package:action_indicators/indicator_insets.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
           child: _indicators
-              ? ActionIndicators(
+              ? ActionsIndicator(
                   color: arrowColor,
                   indicators: IndicatorInsets.all(),
                   child: Container(
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 200,
                     height: 300,
                   ))
-              : ActionIndicator(
+              : SingleIndicator(
                   indicator: IndicatorInsets.only(bottom: true),
                   color: arrowColor)),
       floatingActionButton: FloatingActionButton(
