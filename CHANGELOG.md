@@ -1,3 +1,7 @@
+## 0.1.0
+* Fixed issue with using animation controller after widget being disposed again
+* Removed duplicated code for indicator animations
+
 ## 0.0.9
 * Fixed issue with using animation controller after widget being disposed
 
