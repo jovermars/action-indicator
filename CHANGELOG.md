@@ -1,4 +1,7 @@
-## 0.1.0
+## 0.11.0
+* Added ability to color each arrow separatelyu
+
+## 0.10.0
 * Fixed issue with using animation controller after widget being disposed again
 * Removed duplicated code for indicator animations
 

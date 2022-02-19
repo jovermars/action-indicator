@@ -1,75 +1,75 @@
+import 'package:flutter/material.dart';
+
+const defaultColor = Colors.white;
+
+class Indicator {
+  final Color color;
+  Indicator({this.color = defaultColor});
+}
+
 enum InsetDiagonal {
   leftRight,
   rightLeft,
 }
 
 class IndicatorInsets {
-  final bool left;
-  final bool top;
-  final bool right;
-  final bool bottom;
+  final Indicator? left;
+  final Indicator? top;
+  final Indicator? right;
+  final Indicator? bottom;
 
-  final bool topLeft;
-  final bool topRight;
-  final bool bottomLeft;
-  final bool bottomRight;
+  final Indicator? topLeft;
+  final Indicator? topRight;
+  final Indicator? bottomLeft;
+  final Indicator? bottomRight;
 
   IndicatorInsets({
-    required this.left,
-    required this.top,
-    required this.right,
-    required this.bottom,
-    required this.topLeft,
-    required this.topRight,
-    required this.bottomLeft,
-    required this.bottomRight,
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
+    this.topLeft,
+    this.topRight,
+    this.bottomLeft,
+    this.bottomRight,
   });
 
-  IndicatorInsets.diagonal({required InsetDiagonal diagonal})
-      : topLeft = diagonal == InsetDiagonal.leftRight,
-        topRight = diagonal == InsetDiagonal.rightLeft,
-        bottomLeft = diagonal == InsetDiagonal.rightLeft,
-        bottomRight = diagonal == InsetDiagonal.leftRight,
-        left = false,
-        top = false,
-        right = false,
-        bottom = false;
+  IndicatorInsets.diagonal(
+      {required InsetDiagonal diagonal, Color color = defaultColor})
+      : topLeft = diagonal == InsetDiagonal.leftRight
+            ? Indicator(color: color)
+            : null,
+        topRight = diagonal == InsetDiagonal.rightLeft
+            ? Indicator(color: color)
+            : null,
+        bottomLeft = diagonal == InsetDiagonal.rightLeft
+            ? Indicator(color: color)
+            : null,
+        bottomRight = diagonal == InsetDiagonal.leftRight
+            ? Indicator(color: color)
+            : null,
+        left = null,
+        top = null,
+        right = null,
+        bottom = null;
 
-  IndicatorInsets.all()
-      : topLeft = true,
-        topRight = true,
-        bottomLeft = true,
-        bottomRight = true,
-        left = true,
-        top = true,
-        right = true,
-        bottom = true;
-
-  IndicatorInsets.only({
-    bool? left,
-    bool? top,
-    bool? right,
-    bool? bottom,
-    bool? topLeft,
-    bool? topRight,
-    bool? bottomLeft,
-    bool? bottomRight,
-  })  : topLeft = topLeft ?? false,
-        topRight = topRight ?? false,
-        bottomLeft = bottomLeft ?? false,
-        bottomRight = bottomRight ?? false,
-        left = left ?? false,
-        top = top ?? false,
-        right = right ?? false,
-        bottom = bottom ?? false;
+  IndicatorInsets.all({color = defaultColor})
+      : topLeft = Indicator(color: color),
+        topRight = Indicator(color: color),
+        bottomLeft = Indicator(color: color),
+        bottomRight = Indicator(color: color),
+        left = Indicator(color: color),
+        top = Indicator(color: color),
+        right = Indicator(color: color),
+        bottom = Indicator(color: color);
 
   int get count =>
-      (topLeft ? 1 : 0) +
-      (topRight ? 1 : 0) +
-      (bottomLeft ? 1 : 0) +
-      (bottomRight ? 1 : 0) +
-      (left ? 1 : 0) +
-      (top ? 1 : 0) +
-      (right ? 1 : 0) +
-      (bottom ? 1 : 0);
+      (topLeft != null ? 1 : 0) +
+      (topRight != null ? 1 : 0) +
+      (bottomLeft != null ? 1 : 0) +
+      (bottomRight != null ? 1 : 0) +
+      (left != null ? 1 : 0) +
+      (top != null ? 1 : 0) +
+      (right != null ? 1 : 0) +
+      (bottom != null ? 1 : 0);
 }

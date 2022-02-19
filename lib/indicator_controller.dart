@@ -12,13 +12,13 @@ class IndicatorController extends ChangeNotifier {
   late AnimationController _controller;
 
   late Animation<double> _offsetAnimation;
-  late Animation<Color?> _colorAnimation;
+  late Animation<double> _opacityAnimation;
 
-  Color get currentColor => _colorAnimation.value!;
+  double get currentOpacity => _opacityAnimation.value;
   double get currentOffset => _offsetAnimation.value;
 
-  late Tween<double> _offsetTween;
-  late Animatable<Color?> _colorTween;
+  late Animatable<double> _offsetTween;
+  late Animatable<double> _opacityTween;
 
   IndicatorController({
     required this.vsync,
@@ -28,20 +28,15 @@ class IndicatorController extends ChangeNotifier {
     required this.offset,
   }) {
     _offsetTween = Tween(begin: 0, end: offset);
-    _colorTween = TweenSequence<Color?>([
-      TweenSequenceItem(
-          weight: 2.0,
-          tween: ColorTween(begin: color.withOpacity(0), end: color)),
-      TweenSequenceItem(
-          weight: 1.0, tween: ColorTween(begin: color, end: color)),
-      TweenSequenceItem(
-          weight: 2.0,
-          tween: ColorTween(begin: color, end: color.withOpacity(0))),
+    _opacityTween = TweenSequence<double>([
+      TweenSequenceItem(weight: 2.0, tween: Tween(begin: 0, end: 1)),
+      TweenSequenceItem(weight: 1.0, tween: Tween(begin: 1, end: 1)),
+      TweenSequenceItem(weight: 2.0, tween: Tween(begin: 1, end: 0)),
     ]);
 
     _controller = AnimationController(vsync: vsync, duration: duration);
 
-    _colorAnimation = _colorTween.animate(
+    _opacityAnimation = _opacityTween.animate(
         CurvedAnimation(parent: _controller, curve: const Interval(0, 1.0)))
       ..addListener(_animationListener);
 

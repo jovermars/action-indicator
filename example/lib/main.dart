@@ -45,14 +45,24 @@ class _MyHomePageState extends State<MyHomePage> {
           child: _indicators
               ? ActionsIndicator(
                   color: arrowColor,
-                  indicators: IndicatorInsets.all(),
+                  indicators: IndicatorInsets(
+                    top: Indicator(color: Colors.blue),
+                    left: Indicator(color: Colors.purple),
+                    bottom: Indicator(color: Colors.lightGreen),
+                    right: Indicator(color: Colors.pink),
+                    topLeft: Indicator(color: Colors.orange),
+                    topRight: Indicator(color: Colors.teal),
+                    bottomLeft: Indicator(color: Colors.amber),
+                    bottomRight: Indicator(color: Colors.red),
+                  ),
                   child: Container(
                     color: containerColor,
                     width: 200,
                     height: 300,
                   ))
               : SingleIndicator(
-                  indicator: IndicatorInsets.only(bottom: true),
+                  indicator: IndicatorInsets(
+                      bottom: Indicator(color: Colors.blueAccent)),
                   color: arrowColor)),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggle,

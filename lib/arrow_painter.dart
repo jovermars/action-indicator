@@ -5,7 +5,7 @@ import 'indicator_insets.dart';
 class ArrowPainter extends CustomPainter {
   final double width;
   final double thickness;
-  final Color color;
+  final double opacity;
   final double offset;
   final IndicatorInsets indicators;
   final Paint _painter;
@@ -14,10 +14,9 @@ class ArrowPainter extends CustomPainter {
     required this.indicators,
     required this.width,
     required this.thickness,
-    required this.color,
+    required this.opacity,
     required this.offset,
   }) : _painter = Paint()
-          ..color = color
           ..strokeWidth = thickness
           ..style = PaintingStyle.stroke
           ..strokeJoin = StrokeJoin.round
@@ -25,57 +24,60 @@ class ArrowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var arrow = Path();
-    arrow.moveTo(0, width);
-    arrow.lineTo(0, 0);
-    arrow.lineTo(width, 0);
+    var path = Path();
+    path.moveTo(0, width);
+    path.lineTo(0, 0);
+    path.lineTo(width, 0);
 
     // top
-    if (indicators.top) {
+    if (indicators.top != null) {
       var topCenter = Offset(size.width / 2, -offset - width / 2);
-      var rotation = math.pi * 0.25;
-      drawRotated(canvas, arrow, topCenter, rotation);
+      drawRotated(canvas, path, topCenter, math.pi * 0.25, indicators.top!);
     }
 
-    if (indicators.bottom) {
+    if (indicators.bottom != null) {
       var bottomCenter =
           Offset(size.width / 2, size.height + offset + width / 2);
-      drawRotated(canvas, arrow, bottomCenter, math.pi * -0.75);
+      drawRotated(
+          canvas, path, bottomCenter, math.pi * -0.75, indicators.bottom!);
     }
 
-    if (indicators.left) {
+    if (indicators.left != null) {
       var leftCenter = Offset(-offset - width / 2, size.height / 2);
-      drawRotated(canvas, arrow, leftCenter, math.pi * -0.25);
+      drawRotated(canvas, path, leftCenter, math.pi * -0.25, indicators.left!);
     }
 
-    if (indicators.right) {
+    if (indicators.right != null) {
       var rightCenter =
           Offset(size.width + offset + width / 2, size.height / 2);
-      drawRotated(canvas, arrow, rightCenter, math.pi * 0.75);
+      drawRotated(canvas, path, rightCenter, math.pi * 0.75, indicators.right!);
     }
 
-    if (indicators.topLeft) {
+    if (indicators.topLeft != null) {
       var topLeft = Offset(-offset, -offset);
-      drawRotated(canvas, arrow, topLeft, 0);
+      drawRotated(canvas, path, topLeft, 0, indicators.topLeft!);
     }
 
-    if (indicators.topRight) {
+    if (indicators.topRight != null) {
       var topRight = Offset(size.width + offset, -offset);
-      drawRotated(canvas, arrow, topRight, math.pi * 0.5);
+      drawRotated(canvas, path, topRight, math.pi * 0.5, indicators.topRight!);
     }
 
-    if (indicators.bottomLeft) {
+    if (indicators.bottomLeft != null) {
       var bottomLeft = Offset(-offset, size.height + offset);
-      drawRotated(canvas, arrow, bottomLeft, math.pi * -0.5);
+      drawRotated(
+          canvas, path, bottomLeft, math.pi * -0.5, indicators.bottomLeft!);
     }
 
-    if (indicators.bottomRight) {
+    if (indicators.bottomRight != null) {
       var bottomRight = Offset(size.width + offset, size.height + offset);
-      drawRotated(canvas, arrow, bottomRight, math.pi);
+      drawRotated(canvas, path, bottomRight, math.pi, indicators.bottomRight!);
     }
   }
 
-  void drawRotated(Canvas canvas, Path p, Offset position, double rotation) {
+  void drawRotated(Canvas canvas, Path p, Offset position, double rotation,
+      Indicator indicator) {
+    _painter.color = indicator.color.withOpacity(opacity);
     canvas.save();
     canvas.translate(position.dx, position.dy);
     canvas.rotate(rotation);
@@ -92,7 +94,7 @@ class ArrowPainter extends CustomPainter {
   // ignore: hash_and_equals
   bool operator ==(Object other) {
     return other is ArrowPainter &&
-        other.color == color &&
+        other.opacity == opacity &&
         other.offset == offset &&
         other.width == width &&
         other.thickness == thickness;

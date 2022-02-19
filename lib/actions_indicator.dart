@@ -66,7 +66,7 @@ class _ActionsIndicatorState extends State<ActionsIndicator>
           ? ArrowPainter(
               width: widget.width,
               thickness: widget.thickness,
-              color: _controller.currentColor,
+              opacity: _controller.currentOpacity,
               offset: _controller.currentOffset,
               indicators: widget.indicators,
             )
