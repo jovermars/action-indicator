@@ -1,5 +1,5 @@
 ## 0.11.0
-* Added ability to color each arrow separatelyu
+* Added ability to color each indicator separately
 
 ## 0.10.0
 * Fixed issue with using animation controller after widget being disposed again
